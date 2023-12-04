@@ -2,9 +2,17 @@
   "name": "km-backend",
   "version": "0.0.1",
   "description": "Backend for KloudMon",
-  "main": "src/server.ts",
+  "main": "src/index.ts",
   "scripts": {
-    "test": "echo \"No test specified\" && exit 0"
+    "dev": "nodemon src/index.ts",
+    "build": "tsc",
+    "start": "pm2 start ./dist/index.js --no-daemon",
+    "generate": "drizzle-kit generate:pg",
+    "generate:custom": "drizzle-kit generate:pg --custom",
+    "studio": "drizzle-kit studio",
+    "commit": "cz",
+    "prepare": "husky install",
+    "typecheck": "tsc --noEmit"
   },
   "repository": {
     "type": "git",
