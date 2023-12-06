@@ -7,7 +7,7 @@
     "dev": "nodemon src/index.ts",
     "build": "tsc",
     "start": "pm2 start ./dist/index.js --no-daemon",
-    "generate": "drizzle-kit generate:pg",
+    "db-generate": "drizzle-kit generate:pg",
     "generate:custom": "drizzle-kit generate:pg --custom",
     "studio": "drizzle-kit studio",
     "commit": "cz",
