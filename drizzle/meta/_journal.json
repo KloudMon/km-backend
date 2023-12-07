@@ -1,0 +1,27 @@
+{
+  "version": "5",
+  "dialect": "pg",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1701883365929,
+      "tag": "0000_silly_pretty_boy",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1701963892870,
+      "tag": "0001_regular_harrier",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1701964927348,
+      "tag": "0002_wonderful_lake",
+      "breakpoints": true
+    }
+  ]
+}
