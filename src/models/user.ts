@@ -1,9 +1,9 @@
-import { pgTable, serial, text, timestamp } from "drizzle-orm/pg-core";
+import { pgTable, serial, text, timestamp, uniqueIndex } from "drizzle-orm/pg-core";
 
 const user = pgTable('users', {
     id: serial('id').primaryKey(),
     name: text('name').notNull(),
-    email: text('email').notNull(),
+    email: text('email').unique().notNull(),
     encrypted_password: text('encrypted_password').notNull(),
     email_confirmed_at: timestamp('email_confirmed_at'),
     confirmation_token: text('confirmation_token'),
@@ -14,6 +14,8 @@ const user = pgTable('users', {
     deleted_at: timestamp('deleted_at'),
     created_at: timestamp('created_at').notNull().defaultNow(),
     updated_at: timestamp('updated_at').notNull().defaultNow(),
-})
+}, (table) => ({
+    emailIdx: uniqueIndex("email_idx").on(table.email)
+}))
 
 export default user;
