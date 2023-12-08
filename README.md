@@ -3,7 +3,9 @@
 ### Todo:
 - [ ] users
   - [x] model
-  - [ ] register
+  - [x] register
+  - [ ] set-up smtp
+  - [ ] email verification
   - [ ] login
   - [ ] `authorized` middleware
   - [ ] OAuth
