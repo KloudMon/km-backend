@@ -8,7 +8,6 @@ const router = express.Router();
 router.post('/register', validateSchema(registerSchema), async (req, res) => {
     try {
         const { name, email, password } = req.body;
-        console.log({ name, email, password });
 
         const user = await getUser(email);
         if (user) {
