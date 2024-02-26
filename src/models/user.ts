@@ -18,4 +18,7 @@ const user = pgTable('users', {
     emailIdx: uniqueIndex("email_idx").on(table.email)
 }))
 
+export type UserInsert = typeof user.$inferInsert;
+export type UserSelect = typeof user.$inferSelect;
+
 export default user;
