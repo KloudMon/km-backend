@@ -4,7 +4,7 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-const sql = postgres({
+const sql: postgres.Sql<{}> = postgres({
     hostname: process.env.DBHOST as string,
     port: Number(process.env.DBPORT),
     username: process.env.DBUSER,
