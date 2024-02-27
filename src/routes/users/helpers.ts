@@ -11,3 +11,14 @@ export const registerUser = async (name: string, email: string, password: string
     const encrypted_password = await bcrypt.hash(password, 10);
     return await db.insert(user).values({ name, email, encrypted_password });
 }
+
+export const verifyLogin = async (email: string, password: string): Promise<UserSelect> => {
+    const user = await getUser(email);
+
+    if (!user) throw new UnauthorizedError("Invalid email or password!");
+
+    const passwordIsValid = await bcrypt.compare(password, user.encrypted_password);
+    if (!passwordIsValid) throw new UnauthorizedError("Invalid email or password!");
+
+    return user;
+}
