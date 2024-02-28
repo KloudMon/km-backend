@@ -1,7 +1,7 @@
 import express from 'express';
 import validateSchema from '../../middlewares/validate-schema';
-import { registerSchema } from './schema';
-import { getUser, registerUser } from './helpers';
+import { loginSchema, registerSchema } from './schema';
+import { getUser, registerUser, verifyLogin } from './helpers';
 
 const router = express.Router();
 
@@ -23,9 +23,15 @@ router.post('/register', validateSchema(registerSchema), async (req, res) => {
     res.end();
 })
 
-router.post('/login', (req, res) => {
-    // TODO: add login API
-    res.send('WIP');
+router.post('/login', validateSchema(loginSchema), async (req, res) => {
+    const { email, password } = req.body;
+    
+    const user = await verifyLogin(email, password);
+
+    //TODO: create access & refresh tokens
+
+
+    res.json(user);
 })
 
 export default router;
