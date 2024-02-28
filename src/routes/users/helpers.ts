@@ -1,7 +1,8 @@
 import { eq } from "drizzle-orm";
 import bcrypt from 'bcrypt';
 import db from "../../db"
-import user from "../../models/user"
+import user, { UserSelect } from "../../models/user"
+import { UnauthorizedError } from "../../utils/errors";
 
 export const getUser = async (email: string) => {
     return (await db.select().from(user).where(eq(user.email, email)))[0];
