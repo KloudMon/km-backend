@@ -23,3 +23,13 @@ export const verifyLogin = async (email: string, password: string): Promise<User
 
     return user;
 }
+
+export const createAccessToken = (id: string, email: string, name: string) => {
+    const payload = { id, email, name };
+    return jwt.sign(payload, process.env.JWT_SECRET!, { expiresIn: '30m' });
+}
+
+export const createRefreshToken = (id: string, email: string, name: string) => {
+    const payload = { id, email, name };
+    return jwt.sign(payload, process.env.JWT_SECRET!, { expiresIn: '7d' });
+}
