@@ -1,7 +1,7 @@
 import express from 'express';
 import validateSchema from '../../middlewares/validate-schema';
 import { loginSchema, registerSchema } from './schema';
-import { getUser, registerUser, verifyLogin } from './helpers';
+import { createAccessToken, createRefreshToken, getUser, registerUser, setAccessTokenCookie, setRefreshTokenCookie, verifyLogin } from './helpers';
 
 const router = express.Router();
 
@@ -28,10 +28,15 @@ router.post('/login', validateSchema(loginSchema), async (req, res) => {
     
     const user = await verifyLogin(email, password);
 
-    //TODO: create access & refresh tokens
+    const accessToken = createAccessToken(String(user.id), user.email, user.name);
+    const refreshToken = createRefreshToken(String(user.id), user.email, user.name);
 
+    setAccessTokenCookie(res, accessToken);
+    setRefreshTokenCookie(res, refreshToken);
 
-    res.json(user);
+    const { encrypted_password: _, ...userWithoutPassword } = user;
+
+    res.json(userWithoutPassword);
 })
 
 export default router;
