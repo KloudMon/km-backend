@@ -47,3 +47,8 @@ export const setRefreshTokenCookie = (res: Response, refreshToken: string) => {
     date.setDate(date.getDate() + 7);
     res.cookie('refreshToken', refreshToken, { httpOnly: true, expires: date, sameSite: 'none', secure: true });
 };
+
+export const verifyToken = (token: string): { id: string, email: string, name: string } => {
+    const payload = jwt.verify(token, process.env.JWT_SECRET!) as { id: string, email: string, name: string };
+    return payload;
+}
