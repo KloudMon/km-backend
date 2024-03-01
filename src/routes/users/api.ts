@@ -32,12 +32,11 @@ router.post('/login', validateSchema(loginSchema), async (req, res, next) => {
         const accessToken = createAccessToken(String(user.id), user.email, user.name);
         const refreshToken = createRefreshToken(String(user.id), user.email, user.name);
     
-        setAccessTokenCookie(res, accessToken);
         setRefreshTokenCookie(res, refreshToken);
     
         const { encrypted_password: _, ...userWithoutPassword } = user;
     
-        res.json(userWithoutPassword);
+        res.json({ user: userWithoutPassword, accessToken });
     } catch (err) {
         next(err);
     }
